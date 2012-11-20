@@ -16,14 +16,14 @@ $> REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    wget https://raw.github.com/raaapha/remotebox/master/remotebox.py
 ```
 
-on your terminal. Afterward, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
+on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
 Usage
 -----
 
 As said above, you can use remotebox to control your rhythmbox remotely through a TCP socket. Once the plugin is installed and Rhythmbox is running, a typical remote session might be as follows (using netcat as a client, assuming Rhythmbox us running locally and playing a file):
 
-```shell
+```bash
  $ netcat localhost 30666
 
 next # -> Client request
@@ -72,7 +72,7 @@ Available commands
 
 ###Example of a xml-formatted file list in response to a `list` request###
 
-```
+```xml
 <xml version='1.0' encoding='utf-8'>
   <tracks>
     <track>
@@ -100,7 +100,7 @@ Available commands
 ```
 The values in every field (`<artist>`, `<title>`, `<album>`, `<url>`) are base64 encoded uft8 strings. If we decode these fields, we get:
 
-```
+```xml
 <xml version='1.0' encoding='utf-8'>
   <tracks>
     <track>
