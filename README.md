@@ -8,8 +8,8 @@ Installation
 
 To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
-```
-$> REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
+```bash
+> REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p $REMOTEBOXPATH && \
    cd $REMOTEBOXPATH && \
    wget https://raw.github.com/raaapha/remotebox/master/remotebox.plugin && \
