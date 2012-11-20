@@ -1,30 +1,30 @@
 remotebox
 =========
 
-Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythmbox/) which opens a socket at port 36666 and listens for remote commands. It was developed as a backend for [Remotebox](http://not.online.yet/) android app, but it can be used by any application that supports communication via TCP sockets.
+Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythmbox/) which opens a socket at port 30666 and listens for remote commands. It was developed as a backend for [Remotebox](http://not.online.yet/) android app, but it can be used by any application that supports communication via TCP sockets.
 
 Installation
 ------------
 
-To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to your Rhythmbox plugin directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type on your terminal:
+To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```
-$> REMOTEBOXPATH="~/.local/share/rhythmbox/plugins/remotebox/" && \
+$> REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p $REMOTEBOXPATH && \
    cd $REMOTEBOXPATH && \
    wget https://raw.github.com/raaapha/remotebox/master/remotebox.plugin && \
    wget https://raw.github.com/raaapha/remotebox/master/remotebox.py
 ```
 
-on your terminal.
+on your terminal. Afterward, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
 Usage
 -----
 
-As said above, you can use remotebox to control your rhythmbox remotely through a TCP socket. Once the plugin is installed and Rhythmbox is running, a typical remote session might be as follows (using netcat as a client, assuming Rhythmbox us running and playing a file on IP 192.168.0.100):
+As said above, you can use remotebox to control your rhythmbox remotely through a TCP socket. Once the plugin is installed and Rhythmbox is running, a typical remote session might be as follows (using netcat as a client, assuming Rhythmbox us running locally and playing a file):
 
 ```shell
- $ netcat 192.168.0.100 36666
+ $ netcat localhost 30666
 
 next # -> Client request
 ok # -> remotebox response
@@ -58,16 +58,16 @@ Available commands
 ------------------
 
 <table>
-<tr><td>Request</td><td>Response</td><td>Explanation</td></tr>
-<tr><td>play</td><td>`ok\n`</td><td>If there isn't any file selected, the response is ``</td></tr>
+<tr><th>Request</th><th>Response</th><th>Explanation</th></tr>
+<tr><td>play</td><td>`ok\n`</td><td>If there isn't any file selected, the response is `Error on play: no track selected!`</td></tr>
 <tr><td>pause</td><td>`ok\n`</td><td></td></tr>
 <tr><td>stop</td><td>`ok\n`</td><td></td></tr>
 <tr><td>next</td><td>`ok\n`</td><td></td></tr>
 <tr><td>prev</td><td>`ok\n`</td><td></td></tr>
 <tr><td>vol</td><td>`0.9\n`</td><td>The response is the current volume setting, a float point between 0.0 and 1.0</td></tr>
-<tr><td>vol 0.7</td><td>`ok\n`</td><td>Set the volume to a float point between 0.0 and 1.0. If the requested setting is invalid, return ``</td></tr>
+<tr><td>vol 0.7</td><td>`ok\n`</td><td>Sets the volume to a float point between 0.0 and 1.0. If the requested setting is invalid, returns `Invalid volume setting.`</td></tr>
 <tr><td>goto file://path/to/a/file.mp3</td><td>`ok\n`</td><td>Plays the specified file. If it doens't exist, return ``</td></tr>
-<tr><td>list</td><td>xml-formatted string containing base64 encoded information about the files on rhythmbox library.</td><td>See example below</td></tr>
+<tr><td>list</td><td>XML-formatted string containing base64 encoded information about the files on rhythmbox library.</td><td>See example below</td></tr>
 </table>
 
 ###Example of a xml-formatted file list in response to a `list` request###
