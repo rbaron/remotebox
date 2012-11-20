@@ -6,7 +6,7 @@ Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythm
 Installation
 ------------
 
-To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
+To install the plugin, simply copy the files `remotebox.py` and `remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
 >  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
