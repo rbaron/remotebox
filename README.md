@@ -6,7 +6,7 @@ Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythm
 Installation
 ------------
 
-To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to your Rhythmbox plugin directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
+To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to your Rhythmbox plugin directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type on your terminal:
 
 ```
 $> REMOTEBOXPATH="~/.local/share/rhythmbox/plugins/remotebox/" && \
@@ -58,16 +58,17 @@ Available commands
 ------------------
 
 <table>
-<td>Request</td><td>Response</td><td>Explanation</td>
-<td>play</td><td>`ok\n`</td><td>If there isn't any file selected, the response is ``</td>
-<td>pause</td><td>`ok\n`</td><td></td>
-<td>stop</td><td>`ok\n`</td><td></td>
-<td>next</td><td>`ok\n`</td><td></td>
-<td>prev</td><td>`ok\n`</td><td></td>
-<td>vol</td><td>`0.9\n`</td><td>The response is the current volume setting, a float point between 0.0 and 1.0</td>
-<td>vol 0.7</td><td>`ok\n`</td><td>Set the volume to a float point between 0.0 and 1.0. If the requested setting is invalid, return ``</td>
-<td>goto file://path/to/a/file.mp3</td><td>`ok\n`</td><td>Plays the specified file. If it doens't exist, return ``</td>
-<td>list</td><td>xml-formatted string containing base64 encoded information about the files on rhythmbox library.</td><td>See example below</td>
+<tr><td>Request</td><td>Response</td><td>Explanation</td></tr>
+<tr><td>play</td><td>`ok\n`</td><td>If there isn't any file selected, the response is ``</td></tr>
+<tr><td>pause</td><td>`ok\n`</td><td></td></tr>
+<tr><td>stop</td><td>`ok\n`</td><td></td></tr>
+<tr><td>next</td><td>`ok\n`</td><td></td></tr>
+<tr><td>prev</td><td>`ok\n`</td><td></td></tr>
+<tr><td>vol</td><td>`0.9\n`</td><td>The response is the current volume setting, a float point between 0.0 and 1.0</td></tr>
+<tr><td>vol 0.7</td><td>`ok\n`</td><td>Set the volume to a float point between 0.0 and 1.0. If the requested setting is invalid, return ``</td></tr>
+<tr><td>goto file://path/to/a/file.mp3</td><td>`ok\n`</td><td>Plays the specified file. If it doens't exist, return ``</td></tr>
+<tr><td>list</td><td>xml-formatted string containing base64 encoded information about the files on rhythmbox library.</td><td>See example below</td></tr>
+</table>
 
 ###Example of a xml-formatted file list in response to a `list` request###
 
