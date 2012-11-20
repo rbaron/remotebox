@@ -9,7 +9,11 @@ Installation
 To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to your Rhythmbox plugin directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```
- $ 
+$> REMOTEBOXPATH="~/.local/share/rhythmbox/plugins/remotebox/" && \
+   mkdir -p $REMOTEBOXPATH && \
+   cd $REMOTEBOXPATH && \
+   wget https://raw.github.com/raaapha/remotebox/master/remotebox.plugin && \
+   wget https://raw.github.com/raaapha/remotebox/master/remotebox.py
 ```
 
 on your terminal.
@@ -20,7 +24,7 @@ Usage
 As said above, you can use remotebox to control your rhythmbox remotely through a TCP socket. Once the plugin is installed and Rhythmbox is running, a typical remote session might be as follows (using netcat as a client, assuming Rhythmbox us running and playing a file on IP 192.168.0.100):
 
 ```shell
- $ netcat 192.168.0.100
+ $ netcat 192.168.0.100 36666
 
 next # -> Client request
 ok # -> remotebox response
@@ -65,7 +69,7 @@ Available commands
 <td>goto file://path/to/a/file.mp3</td><td>`ok\n`</td><td>Plays the specified file. If it doens't exist, return ``</td>
 <td>list</td><td>xml-formatted string containing base64 encoded information about the files on rhythmbox library.</td><td>See example below</td>
 
-#Example of a xml-formatted file list in response to a `list` request#
+###Example of a xml-formatted file list in response to a `list` request###
 
 ```
 <xml version='1.0' encoding='utf-8'>
@@ -74,13 +78,17 @@ Available commands
       <artist>VGhlIEJlYXRsZXMK</artist>
       <title>V2l0aCBhIGxpdHRsZSBoZWxwIGZyb20gbXkgZnJpZW5kcwo=</title>
       <album>U2d0LiBQZXBwZXLigJlzIExvbmVseSBIZWFydHMgQ2x1YiBCYW5kCg==</album>
-      <url>ZmlsZTovL215L2F1ZGlvL2ZvbGRlci90aGUlMjBiZWF0bGVzJTIwLSUyMHdpdGglMjBhJTIwbGl0dGxlJTIwaGVscCUyMGZyb20lMjBteSUyMGZyaWVuZHMubXAzCg==</url>
+      <url>ZmlsZTovL215L2F1ZGlvL2ZvbGRlci90aGUlMjBiZWF0bGVzJTIwLSUyMHdpd
+          GglMjBhJTIwbGl0dGxlJTIwaGVscCUyMGZyb20lMjBteSUyMGZyaWVuZHMubXAzCg==
+      </url>
     </track>
     <track>
       <artist>VGhlIEJlYXRsZXMK</artist>
       <title>THVjeSBpbiB0aGUgZGt5IHdpdGggZGlhbW9uZHMK</title>
       <album>U2d0LiBQZXBwZXLigJlzIExvbmVseSBIZWFydHMgQ2x1YiBCYW5kCg==</album>
-      <url>ZmlsZTovL215L2F1ZGlvL2ZvbGRlci90aGUlMjBiZWF0bGVzJTIwLSUyMGx1Y3klMjBpbiUyMHRoZSUyMHNreSUyMHdpdGglMjBkaWFtb25kcy5tcDMK</url>
+      <url>ZmlsZTovL215L2F1ZGlvL2ZvbGRlci90aGUlMjBiZWF0bGVzJTIwLSUyMGx1Y
+          3klMjBpbiUyMHRoZSUyMHNreSUyMHdpdGglMjBkaWFtb25kcy5tcDMK
+      </url>
     </track>
     .
     .
@@ -89,7 +97,7 @@ Available commands
 </xml>
 
 ```
-The values in everyfield (<artist>, <title>, <album>, <url>) are base64 encoded uft8 strings. If we decode these fields, we get:
+The values in everyfield (`<artist>`, `<title>`, `<album>`, `<url>`) are base64 encoded uft8 strings. If we decode these fields, we get:
 
 ```
 <xml version='1.0' encoding='utf-8'>
