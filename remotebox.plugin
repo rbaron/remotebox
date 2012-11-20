@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python
+Module=remotebox
+IAge=2
+Name=remotebox - add socket communication to rhythmbox
+Description=control and fetch data from rhythmbox via sockets
+Authors=Raphael B 
+Copyright=MIT License
+Website=http://github.com/raaapha/remotebox/
