@@ -9,7 +9,7 @@ Installation
 To install the plugin, simply copy the files `rhythmbox.py` and `rhythmbox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
-> REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
+>  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p $REMOTEBOXPATH && \
    cd $REMOTEBOXPATH && \
    wget https://raw.github.com/raaapha/remotebox/master/remotebox.plugin && \
@@ -21,7 +21,7 @@ on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go t
 Usage
 -----
 
-As said above, you can use remotebox to control your rhythmbox remotely through a TCP socket. Once the plugin is installed and Rhythmbox is running, a typical remote session might be as follows (using netcat as a client, assuming Rhythmbox us running locally and playing a file):
+As said above, you can use remotebox to control your Rhythmbox remotely through a TCP socket. Once the plugin is installed and Rhythmbox is running, a typical remote session might be as follows (using netcat as a client, assuming Rhythmbox us running locally and playing a file):
 
 ```bash
  $ netcat localhost 30666
