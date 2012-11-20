@@ -197,8 +197,6 @@ class MyThread(threading.Thread):
     self.shell.props.shell_player.set_volume(vol)
 
   def _goto(self, trackuri):
-    #Get an entry by location, use this location to play  rb_shell_player_play_entry
-    #entry = self.shell.props.db.entry_lookup_by_location("file:///mnt/sda5/Media/Audio/And%20You%20Will%20Know%20Us%20By%20The%20Trail%20Of%20Dead%20-%20And%20You%20Will%20Know%20Us%20By%20The%20Trail%20Of%20Dead/01%20-%20richter%20scale%20madness.mp3")
     if trackuri:
       # Find entry by uri
       entry = self.shell.props.db.entry_lookup_by_location(trackuri)
@@ -220,10 +218,6 @@ class MyThread(threading.Thread):
     for row in self.shell.props.library_source.props.base_query_model:
       entry = row[0]
 
-      #artist = base64.b64encode(unicode(entry.get_string(RB.RhythmDBPropType.ARTIST), errors='replace'))
-      #title= base64.b64encode(unicode(entry.get_string(RB.RhythmDBPropType.TITLE), errors='ignore'))
-      #album = base64.b64encode(unicode(entry.get_string(RB.RhythmDBPropType.ALBUM), errors='ignore'))
-      #url = base64.b64encode(unicode(entry.get_string(RB.RhythmDBPropType.LOCATION), errors='ignore'))
       artist = base64.b64encode(entry.get_string(RB.RhythmDBPropType.ARTIST))
       title= base64.b64encode(entry.get_string(RB.RhythmDBPropType.TITLE))
       album = base64.b64encode(entry.get_string(RB.RhythmDBPropType.ALBUM))
@@ -237,11 +231,5 @@ class MyThread(threading.Thread):
       xml += "</track>"
 
     xml += "</tracks></xml>"
-
-    print "Total length of XML: "+str(len(xml))
-
-    #f = open('/tmp/xml.test', 'w')
-    #f.write(xml)
-    #f.close()
 
     return xml
