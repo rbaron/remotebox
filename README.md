@@ -85,7 +85,7 @@ Available commands
     </track>
     <track>
       <artist>VGhlIEJlYXRsZXMK</artist>
-      <title>THVjeSBpbiB0aGUgZGt5IHdpdGggZGlhbW9uZHMK</title>
+      <title>THVjeSBpbiB0aGUgc2t5IHdpdGggZGlhbW9uZHMK</title>
       <album>U2d0LiBQZXBwZXLigJlzIExvbmVseSBIZWFydHMgQ2x1YiBCYW5kCg==</album>
       <url>ZmlsZTovL215L2F1ZGlvL2ZvbGRlci90aGUlMjBiZWF0bGVzJTIwLSUyMGx1Y
           3klMjBpbiUyMHRoZSUyMHNreSUyMHdpdGglMjBkaWFtb25kcy5tcDMK
@@ -98,7 +98,7 @@ Available commands
 </xml>
 
 ```
-The values in everyfield (`<artist>`, `<title>`, `<album>`, `<url>`) are base64 encoded uft8 strings. If we decode these fields, we get:
+The values in every field (`<artist>`, `<title>`, `<album>`, `<url>`) are base64 encoded uft8 strings. If we decode these fields, we get:
 
 ```
 <xml version='1.0' encoding='utf-8'>
@@ -111,7 +111,7 @@ The values in everyfield (`<artist>`, `<title>`, `<album>`, `<url>`) are base64 
     </track>
     <track>
       <artist>The Beatles</artist>
-      <title>Lucy in the dky with diamonds</title>
+      <title>Lucy in the sky with diamonds</title>
       <album>Sgt. Pepper’s Lonely Hearts Club Band</album>
       <url>file://my/audio/folder/the%20beatles%20-%20lucy%20in%20the%20sky%20with%20diamonds.mp3</url>
     </track>
