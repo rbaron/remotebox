@@ -18,6 +18,8 @@ To install the plugin, simply copy the files `remotebox.py` and `remotebox.plugi
 
 on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
+**Compatility**: remotebox should work with Rhythmbox > 2.97 (tested on a fresh install of ubuntu 12.10). It depends on the python-gobjects, which is the python bindings for GTK3++ GObjects. If you have Rhythmbox > 2.97, you should have it by default. If you tested on older versions and it worked, please let me know! 
+
 Usage
 -----
 
