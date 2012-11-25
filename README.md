@@ -6,19 +6,44 @@ Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythm
 Installation
 ------------
 
-To install the plugin, simply copy the files `remotebox.py` and `remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
+###For GTK3 / Rhythmbox > 2.9x users### 
+Copy the files `gtk3/remotebox.py` and `gtk3/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
 >  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p $REMOTEBOXPATH && \
    cd $REMOTEBOXPATH && \
-   wget https://raw.github.com/raaapha/remotebox/master/remotebox.plugin && \
-   wget https://raw.github.com/raaapha/remotebox/master/remotebox.py
+   wget https://raw.github.com/raaapha/remotebox/master/gtk3/remotebox.plugin && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk3/remotebox.py
 ```
 
 on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
-**Compatility**: remotebox should work with Rhythmbox > 2.97 (tested on Arch Linux [v2.98] and on a fresh install of ubuntu 12.10 [v2.97]). It depends on the python-gobjects, which is the python bindings for GTK3++ GObjects. If you have Rhythmbox > 2.97, you should have it by default. If you tested on older versions and it worked, please let me know! 
+###For GTK2 / Rhythmbox 0.12.x users###
+Copy the files `gtk2/remotebox.py` and `gtk2/remotebox.rb-plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
+
+```bash
+>  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
+   mkdir -p $REMOTEBOXPATH && \
+   cd $REMOTEBOXPATH && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk2/remotebox.rb-plugin && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk2/remotebox.py
+```
+
+on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
+
+###For GTK2 / Rhythmbox < 0.11.x users###
+Copy the files `gtk2/remotebox.py` and `gtk2/remotebox.rb-plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.gnome2/rhythmbox/plugins/`. If you want to automate this process, simply type
+
+```bash
+>  REMOTEBOXPATH=$HOME"/.gnome2/rhythmbox/plugins/remotebox/" && \
+   mkdir -p $REMOTEBOXPATH && \
+   cd $REMOTEBOXPATH && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk2/remotebox.rb-plugin && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk2/remotebox.py
+```
+
+on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
 Usage
 -----

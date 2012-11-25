@@ -1,0 +1,9 @@
+[RB Plugin]
+Loader=python
+Module=remotebox
+IAge=1
+Name=remotebox
+Description=Control and fetch data from rhythmbox via sockets
+Authors=Raphael B
+Copyright=MIT License
+Website=http://github.com/raaapha/remotebox/
