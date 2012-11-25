@@ -193,7 +193,7 @@ class MyThread(threading.Thread):
     self.player.do_previous()
 
   def _getVol(self):
-    return self.player.get_volume()[1]
+    return self.player.get_volume()
 
   def _setVol(self, vol):
     if vol > 1.0:

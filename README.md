@@ -6,7 +6,7 @@ Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythm
 Installation
 ------------
 
-###For GTK3 / Rhythmbox 2.9x users### 
+###For GTK3 / Rhythmbox 2.9x users ### 
 Copy the files `gtk3/remotebox.py` and `gtk3/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
@@ -19,7 +19,7 @@ Copy the files `gtk3/remotebox.py` and `gtk3/remotebox.plugin` to a folder calle
 
 on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
-###For GTK2 / Rhythmbox 0.12.x users###
+###For GTK2 / Rhythmbox 0.12.x users ###
 Copy the files `gtk2/remotebox.py` and `gtk2/remotebox.rb-plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
@@ -32,7 +32,7 @@ Copy the files `gtk2/remotebox.py` and `gtk2/remotebox.rb-plugin` to a folder ca
 
 on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
 
-###For GTK2 / Rhythmbox <= 0.11.x users###
+###For GTK2 / Rhythmbox <= 0.11.x users ###
 Copy the files `gtk2/remotebox.py` and `gtk2/remotebox.rb-plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.gnome2/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
