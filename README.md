@@ -1,7 +1,7 @@
 remotebox
 =========
 
-Remotebox is a plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythmbox/) which opens a socket at port 30666 and listens for remote commands. It was developed as a backend for [Remotebox](http://not.online.yet/) android app, but it can be used by any application that supports communication via TCP sockets.
+Remotebox a remote control plugin for rhythmbox [Rhythmbox](http://projects.gnome.org/rhythmbox/). It was developed to support the [Remotebox](https://play.google.com/store/apps/details?id=net.raphaelbaron.remotebox) android app, but it can be used by any application that can communicate via TCP sockets.
 
 Installation
 ------------
@@ -10,14 +10,14 @@ Installation
 Copy the files `gtk3/remotebox.py` and `gtk3/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
->  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
+$  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p $REMOTEBOXPATH && \
    cd $REMOTEBOXPATH && \
    wget https://raw.github.com/raaapha/remotebox/master/gtk3/remotebox.plugin && \
    wget https://raw.github.com/raaapha/remotebox/master/gtk3/remotebox.py
 ```
 
-on your terminal. Afterwards, make sure the plugin is enabled in Rhythmbox. Go to Edit > Plugins and make sure "remotebox" is checked.
+on your terminal. Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "remotebox" is checked.
 
 ###For GTK2 / Rhythmbox 0.x users
 
