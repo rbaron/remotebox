@@ -6,7 +6,7 @@ Remotebox a remote control plugin for rhythmbox [Rhythmbox](http://projects.gnom
 Installation
 ------------
 ###For GTK3 / Rhythmbox 2.9x users
-Copy the files `gtk3/remotebox.py` and `gtk3/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
+Copy the files `gtk3/2.9x/remotebox.py` and `gtk3/2.9x/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
 $  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
@@ -19,7 +19,7 @@ $  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
 on your terminal. Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "remotebox" is checked.
 
 ###For GTK3 / Rhythmbox 3.x users
-Copy the files `gtk3/remotebox.py` and `gtk3/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
+Copy the files `gtk3/3.x/remotebox.py` and `gtk3/3.x/remotebox.plugin` to a folder called "remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`. If you want to automate this process, simply type
 
 ```bash
 $  REMOTEBOXPATH=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
