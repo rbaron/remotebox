@@ -20,7 +20,7 @@ class RemoteboxPlugin(GObject.Object, Peas.Activatable):
 				super(RemoteboxPlugin, self).__init__()
 
 		def do_activate(self):
-				#print("Hello Remotebox!")
+				# print("Hello Remotebox!")
 				shell = self.object
 
 				# Start a new thread, pass self.object = self.shell as argument
@@ -29,7 +29,7 @@ class RemoteboxPlugin(GObject.Object, Peas.Activatable):
 				t.start()
 
 		def do_deactivate(self):
-				#print("Goodbye Remotebox!")
+				# print("Goodbye Remotebox!")
 				pass
 
 class SockServer:
@@ -40,7 +40,7 @@ class SockServer:
 		self.sock.bind(self.addr)
 		self.sock.listen(1)
 
-	#Blocks here until someone connects
+	# Blocks here until someone connects
 	def accept(self):
 		(self.clientSock, self.clientAddr) = self.sock.accept()
 		print("Client connected!")
@@ -79,7 +79,7 @@ class MyThread(threading.Thread):
 	
 					print("Received: ",self.buff)
 
-					#parts = string.split(self.buff)
+					# parts = string.split(self.buff)
 					parts = self.buff.split()
 
 					print("parts[0]: ",parts[0])
@@ -128,22 +128,22 @@ class MyThread(threading.Thread):
 
 						elif parts[0] == "vol":
 								if len(parts) == 1:
-									#print("Volume: "+str(self._getVol()))
-									#self.srv.send("ok\n")
+									# print("Volume: "+str(self._getVol()))
+									# self.srv.send("ok\n")
 									self.srv.send(str(self._getVol())+"\n")
 
 								else:
 									# Try to convert to float
 									try:
 										if float(parts[1]) <= 1 and float(parts[1]) >= 0:
-											#print("Set volume to "+str(float(parts[1])))
+											# print("Set volume to "+str(float(parts[1])))
 											self._setVol(float(parts[1]))
 											self.srv.send("ok\n")
 										else:
-											#print("Invalid volume setting.")
+											# print("Invalid volume setting.")
 											self.srv.send("Invalid volume setting.\n")
 									except Exception as e:
-										#print("Invalid volume setting.")
+										# print("Invalid volume setting.")
 										self.srv.send("Invalid volume setting.\n")
 									
 						# Big string. First sends the size in bytes. Then keeps sending BUFFSIZE bytes per loop
@@ -164,7 +164,7 @@ class MyThread(threading.Thread):
 									chunk = xml[ptr:(ptr+BUFFSIZE)]
 									self.srv.send(chunk)
 									if end == len(xml)-1:
-										#Send EOL
+										# Send EOL
 										self.srv.send("\n")
 										break
 									else:
@@ -219,17 +219,17 @@ class MyThread(threading.Thread):
 			# Source = main library (all local songs)
 			source =	self.shell.props.library_source
 
-			#print("Entry title: ",entry.get_string(RB.RhythmDBPropType.TITLE))
+			# print("Entry title: ",entry.get_string(RB.RhythmDBPropType.TITLE))
 			self.shell.props.shell_player.play_entry(entry, source)
 
 	def _getTrackList(self):
 
 		xml = "<xml version='1.0' encoding='utf-8'><tracks>"
 
-		#Query for what user sees on the UI. That is, ordered and filtered by the user
-		#for row in self.shell.props.library_source.props.query_model:
+		# Query for what user sees on the UI. That is, ordered and filtered by the user
+		# for row in self.shell.props.library_source.props.query_model:
 
-		#Query for all entries in database, regardless of what user sees on the UI
+		# Query for all entries in database, regardless of what user sees on the UI
 		for row in self.shell.props.library_source.props.base_query_model:
 			entry = row[0]
 
