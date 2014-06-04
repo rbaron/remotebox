@@ -1,4 +1,4 @@
-[Plugin]
+[RB Plugin]
 Loader=python
 Module=remotebox
 IAge=1

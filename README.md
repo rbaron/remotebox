@@ -5,21 +5,6 @@ A remote control plugin for [Rhythmbox](http://projects.gnome.org/rhythmbox/). I
 
 Installation
 ------------
-###For GTK3 / Rhythmbox 2.9x users
-Copy the files `gtk3/2.9x/remotebox.py` and `gtk3/2.9x/remotebox.plugin` to a folder called "Remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`.
-
-To automate the process, copy the following and execute on a terminal console:
-
-```bash
-$  plugin_path="$HOME/.local/share/rhythmbox/plugins/remotebox/" && \
-   mkdir -p "$plugin_path" && \
-   cd "$plugin_path" && \
-   wget https://raw.github.com/raaapha/remotebox/master/gtk3/2.9x/remotebox.plugin && \
-   wget https://raw.github.com/raaapha/remotebox/master/gtk3/2.9x/remotebox.py
-```
-
-Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "Remotebox" is checked.
-
 ###For GTK3 / Rhythmbox 3.x users
 Copy the files `gtk3/3.x/remotebox.py` and `gtk3/3.x/remotebox.plugin` to a folder called "Remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`.
 
@@ -28,12 +13,27 @@ To automate the process, copy the following and execute on a terminal console:
 ```bash
 $  plugin_path=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p "$plugin_path" && \
-   cd "$plugin_path" && \
+   cd "$plugin_path" || exit && \
    wget https://raw.github.com/raaapha/remotebox/master/gtk3/3.x/remotebox.plugin && \
    wget https://raw.github.com/raaapha/remotebox/master/gtk3/3.x/remotebox.py
 ```
 
-on your terminal. Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "Remotebox" is checked.
+Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "Remotebox" is checked.
+
+###For GTK3 / Rhythmbox 2.9x users
+Copy the files `gtk3/2.9x/remotebox.py` and `gtk3/2.9x/remotebox.plugin` to a folder called "Remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`.
+
+To automate the process, copy the following and execute on a terminal console:
+
+```bash
+$  plugin_path="$HOME/.local/share/rhythmbox/plugins/remotebox/" && \
+   mkdir -p "$plugin_path" && \
+   cd "$plugin_path" || exit && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk3/2.9x/remotebox.plugin && \
+   wget https://raw.github.com/raaapha/remotebox/master/gtk3/2.9x/remotebox.py
+```
+
+Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "Remotebox" is checked.
 
 ###For GTK2 / Rhythmbox 0.x users
 
