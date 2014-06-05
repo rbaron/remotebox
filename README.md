@@ -11,7 +11,7 @@ Copy the files `gtk3/3.x/remotebox.py` and `gtk3/3.x/remotebox.plugin` to a fold
 To automate the process, copy the following and execute on a terminal console:
 
 ```bash
-$  plugin_path=$HOME"/.local/share/rhythmbox/plugins/remotebox/" && \
+$  plugin_path="$HOME/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p "$plugin_path" && \
    cd "$plugin_path" || exit && \
    wget https://raw.github.com/raaapha/remotebox/master/gtk3/3.x/remotebox.plugin && \
