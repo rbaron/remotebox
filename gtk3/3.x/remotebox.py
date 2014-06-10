@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from gi.repository import GObject, RB, Peas
 
@@ -26,11 +25,11 @@ class RemoteboxPlugin(GObject.Object, Peas.Activatable):
 
     def do_activate(self):
 
-                # print("Hello Remotebox!")
+        # print("Hello Remotebox!")
 
         shell = self.object
 
-                # Start a new thread, pass self.object = self.shell as argument
+        # Start a new thread, pass self.object = self.shell as argument
 
         t = MyThread(self.object)
         t.daemon = True
@@ -38,7 +37,7 @@ class RemoteboxPlugin(GObject.Object, Peas.Activatable):
 
     def do_deactivate(self):
 
-                # print("Goodbye Remotebox!")
+        # print("Goodbye Remotebox!")
 
         pass
 
@@ -55,7 +54,7 @@ class SockServer:
 
     def accept(self):
         (self.clientSock, self.clientAddr) = self.sock.accept()
-        print 'Client connected!'
+        print('Client connected!')
 
     def receive(self):
         self.buff = self.clientSock.recv(BUFFSIZE)
@@ -64,8 +63,8 @@ class SockServer:
     def send(self, text):
         try:
             self.clientSock.send(bytes(text.encode('utf-8')))
-        except Exception, e:
-            print 'Error while sending!' + str(e)
+        except Exception as e:
+            print('Error while sending!' + str(e))
 
     def cleanup(self):
         self.clientSock.close()
@@ -79,24 +78,24 @@ class MyThread(threading.Thread):
 
     def run(self):
         while 1:
-            print 'Accepting...'
+            print('Accepting...')
             self.srv.accept()
             while 1:
-                print 'Receiving...'
+                print('Receiving...')
                 try:
                     self.buff = self.srv.receive()
 
                     if len(self.buff) == 0:
-                        print 'Received 0 bytes. Assuming disconnection.'
+                        print('Received 0 bytes. Assuming disconnection.')
                         break
 
-                    print ('Received: ', self.buff)
+                    print('Received: ', self.buff)
 
                     # parts = string.split(self.buff)
 
                     parts = self.buff.split()
 
-                    print ('parts[0]: ', parts[0])
+                    print('parts[0]: ', parts[0])
 
                     # Try to run rhythmbox api functions
 
@@ -106,41 +105,36 @@ class MyThread(threading.Thread):
                             try:
                                 self._play()
                                 self.srv.send('ok\n')
-                            except Exception, e:
-                                self.srv.send('Error on play: no track selected!\n'
-                                        )
+                            except Exception as e:
+                                self.srv.send('Error on play: no track selected!\n')
                         elif parts[0] == 'pause':
 
                             try:
                                 self._pause()
                                 self.srv.send('ok\n')
-                            except Exception, e:
-                                self.srv.send('Error on pause: no track selected!\n'
-                                        )
+                            except Exception as e:
+                                self.srv.send('Error on pause: no track selected!\n')
                         elif parts[0] == 'stop':
 
                             try:
                                 self._stop()
                                 self.srv.send('ok\n')
-                            except Exception, e:
-                                self.srv.send('Error on stop: no track selected!\n'
-                                        )
+                            except Exception as e:
+                                self.srv.send('Error on stop: no track selected!\n')
                         elif parts[0] == 'next':
 
                             try:
                                 self._next()
                                 self.srv.send('ok\n')
-                            except Exception, e:
-                                self.srv.send('Error on next: no track selected!\n'
-                                        )
+                            except Exception as e:
+                                self.srv.send('Error on next: no track selected!\n')
                         elif parts[0] == 'prev':
 
                             try:
                                 self._prev()
                                 self.srv.send('ok\n')
-                            except Exception, e:
-                                self.srv.send('Error on prev: no track selected!\n'
-                                        )
+                            except Exception as e:
+                                self.srv.send('Error on prev: no track selected!\n')
                         elif parts[0] == 'goto':
 
                             self._goto(parts[1])
@@ -149,38 +143,35 @@ class MyThread(threading.Thread):
 
                             if len(parts) == 1:
 
-                                    # print("Volume: "+str(self._getVol()))
-                                    # self.srv.send("ok\n")
+                                # print("Volume: "+str(self._getVol()))
+                                # self.srv.send("ok\n")
 
-                                self.srv.send(str(self._getVol()) + '\n'
-                                        )
+                                self.srv.send(str(self._getVol()) + '\n')
                             else:
 
-                                    # Try to convert to float
+                                # Try to convert to float
 
                                 try:
-                                    if float(parts[1]) <= 1 \
-    and float(parts[1]) >= 0:
+                                    if float(parts[1]) <= 1 and float(parts[1]) >= 0:
 
-                                            # print("Set volume to "+str(float(parts[1])))
+                                        # print("Set volume to "+str(float(parts[1])))
 
                                         self._setVol(float(parts[1]))
                                         self.srv.send('ok\n')
                                     else:
 
-                                            # print("Invalid volume setting.")
-
-                                        self.srv.send('Invalid volume setting.\n'
-        )
-                                except Exception, e:
-
                                         # print("Invalid volume setting.")
 
-                                    self.srv.send('Invalid volume setting.\n'
-        )
+                                        self.srv.send('Invalid volume setting.\n')
+                                except Exception as e:
+
+                                    # print("Invalid volume setting.")
+
+                                    self.srv.send('Invalid volume setting.\n')
                         elif parts[0] == 'list':
 
-                        # Big string. First sends the size in bytes. Then keeps sending BUFFSIZE bytes per loop
+                        # Big string. First sends the size in bytes.
+                        # Then keeps sending BUFFSIZE bytes per loop
 
                             try:
                                 xml = self._getTrackList()
@@ -206,24 +197,21 @@ class MyThread(threading.Thread):
                                         break
                                     else:
                                         ptr = ptr + BUFFSIZE
-                            except Exception, e:
+                            except Exception as e:
 
                                 traceback.print_exc()
-                                print 'Error while preparing list: ' \
-                                    + str(e)
+                                print('Error while preparing list: '+str(e))
                         else:
 
-                            print 'Unrecognized input.\n'
+                            print('Unrecognized input.\n')
                             self.srv.send('Unrecognized input.\n')
-                    except Exception, e:
+                    except Exception as e:
 
-                        print 'Error while running rhythmbox api functions:' \
-                            + str(e)
+                        print('Error while running rhythmbox api functions:'+str(e))
                         pass
-                except Exception, e:
+                except Exception as e:
 
-                    print 'Receiving failed! Assuming disconnection... - ' \
-                        + str(e)
+                    print('Receiving failed! Assuming disconnection... - '+str(e))
                     break
 
     def _play(self):
