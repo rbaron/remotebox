@@ -1,7 +1,7 @@
 Remotebox
 =========
 
-A remote control plugin for [Rhythmbox](http://projects.gnome.org/rhythmbox/). It was developed to be used in conjunction with the [Remotebox](https://play.google.com/store/apps/details?id=net.raphaelbaron.Remotebox) android app, but can also be used by any application that can communicate via TCP sockets.
+A remote control plugin for [Rhythmbox](http://projects.gnome.org/rhythmbox/). It was developed to be used in conjunction with the [Remotebox](https://play.google.com/store/apps/details?id=net.raphaelbaron.remotebox) android app, but can also be used by any application that can communicate via TCP sockets.
 
 Installation
 ------------
