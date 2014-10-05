@@ -11,7 +11,7 @@ import base64
 
 # Empty HOST - INADDR_ANY
 
-HOST = ''
+HOST = ""
 PORT = 30666
 BUFFSIZE = 4096
 
@@ -54,17 +54,17 @@ class SockServer:
 
     def accept(self):
         (self.clientSock, self.clientAddr) = self.sock.accept()
-        print('Client connected!')
+        print("Client connected!")
 
     def receive(self):
         self.buff = self.clientSock.recv(BUFFSIZE)
-        return self.buff.decode('utf-8')
+        return self.buff.decode("utf-8")
 
     def send(self, text):
         try:
-            self.clientSock.send(bytes(text.encode('utf-8')))
+            self.clientSock.send(bytes(text.encode("utf-8")))
         except Exception as e:
-            print('Error while sending!' + str(e))
+            print("Error while sending!" + str(e))
 
     def cleanup(self):
         self.clientSock.close()
@@ -77,76 +77,77 @@ class MyThread(threading.Thread):
         self.shell = RBShell
 
     def run(self):
+
         while 1:
-            print('Accepting...')
+            print("Accepting...")
             self.srv.accept()
             while 1:
-                print('Receiving...')
+                print("Receiving...")
                 try:
                     self.buff = self.srv.receive()
 
                     if len(self.buff) == 0:
-                        print('Received 0 bytes. Assuming disconnection.')
+                        print("Received 0 bytes. Assuming disconnection.")
                         break
 
-                    print('Received: ', self.buff)
+                    print("Received: ", self.buff)
 
                     # parts = string.split(self.buff)
 
                     parts = self.buff.split()
 
-                    print('parts[0]: ', parts[0])
+                    print("parts[0]: ", parts[0])
 
                     # Try to run rhythmbox api functions
 
                     try:
 
-                        if parts[0] == 'play':
+                        if parts[0] == "play":
                             try:
                                 self._play()
-                                self.srv.send('ok\n')
+                                self.srv.send("ok\n")
                             except Exception as e:
-                                self.srv.send('Error on play: no track selected!\n')
-                        elif parts[0] == 'pause':
+                                self.srv.send("Error on play: no track selected!\n")
+                        elif parts[0] == "pause":
 
                             try:
                                 self._pause()
-                                self.srv.send('ok\n')
+                                self.srv.send("ok\n")
                             except Exception as e:
-                                self.srv.send('Error on pause: no track selected!\n')
-                        elif parts[0] == 'stop':
+                                self.srv.send("Error on pause: no track selected!\n")
+                        elif parts[0] == "stop":
 
                             try:
                                 self._stop()
-                                self.srv.send('ok\n')
+                                self.srv.send("ok\n")
                             except Exception as e:
-                                self.srv.send('Error on stop: no track selected!\n')
-                        elif parts[0] == 'next':
+                                self.srv.send("Error on stop: no track selected!\n")
+                        elif parts[0] == "next":
 
                             try:
                                 self._next()
-                                self.srv.send('ok\n')
+                                self.srv.send("ok\n")
                             except Exception as e:
-                                self.srv.send('Error on next: no track selected!\n')
-                        elif parts[0] == 'prev':
+                                self.srv.send("Error on next: no track selected!\n")
+                        elif parts[0] == "prev":
 
                             try:
                                 self._prev()
-                                self.srv.send('ok\n')
+                                self.srv.send("ok\n")
                             except Exception as e:
-                                self.srv.send('Error on prev: no track selected!\n')
-                        elif parts[0] == 'goto':
+                                self.srv.send("Error on prev: no track selected!\n")
+                        elif parts[0] == "goto":
 
                             self._goto(parts[1])
-                            self.srv.send('ok\n')
-                        elif parts[0] == 'vol':
+                            self.srv.send("ok\n")
+                        elif parts[0] == "vol":
 
                             if len(parts) == 1:
 
-                                # print("Volume: "+str(self._getVol()))
+                                # print("Volume: "+str(self._get_vol()))
                                 # self.srv.send("ok\n")
 
-                                self.srv.send(str(self._getVol()) + '\n')
+                                self.srv.send(str(self._get_vol()) + "\n")
                             else:
 
                                 # Try to convert to float
@@ -156,29 +157,29 @@ class MyThread(threading.Thread):
 
                                         # print("Set volume to "+str(float(parts[1])))
 
-                                        self._setVol(float(parts[1]))
-                                        self.srv.send('ok\n')
+                                        self._set_vol(float(parts[1]))
+                                        self.srv.send("ok\n")
                                     else:
 
                                         # print("Invalid volume setting.")
 
-                                        self.srv.send('Invalid volume setting.\n')
+                                        self.srv.send("Invalid volume setting.\n")
                                 except Exception as e:
 
                                     # print("Invalid volume setting.")
 
-                                    self.srv.send('Invalid volume setting.\n')
-                        elif parts[0] == 'list':
+                                    self.srv.send("Invalid volume setting.\n")
+                        elif parts[0] == "list":
 
                         # Big string. First sends the size in bytes.
                         # Then keeps sending BUFFSIZE bytes per loop
 
                             try:
-                                xml = self._getTrackList()
+                                xml = self._get_track_list()
 
                                 # Send size
 
-                                self.srv.send(str(len(xml)) + '\n')
+                                self.srv.send(str(len(xml)) + "\n")
 
                                 # Send xml list
 
@@ -193,25 +194,29 @@ class MyThread(threading.Thread):
 
                                         # Send EOL
 
-                                        self.srv.send('\n')
+                                        self.srv.send("\n")
                                         break
                                     else:
                                         ptr = ptr + BUFFSIZE
                             except Exception as e:
 
                                 traceback.print_exc()
-                                print('Error while preparing list: '+str(e))
+                                print("Error while preparing list: "+str(e))
+
+                        elif parts[0] == "get_playing":
+                            self.srv.send(self._get_currently_playing()+"\n")
+
                         else:
 
-                            print('Unrecognized input.\n')
-                            self.srv.send('Unrecognized input.\n')
+                            print("Unrecognized input.\n")
+                            self.srv.send("Unrecognized input.\n")
                     except Exception as e:
 
-                        print('Error while running rhythmbox api functions:'+str(e))
+                        print("Error while running rhythmbox api functions:"+str(e))
                         pass
                 except Exception as e:
 
-                    print('Receiving failed! Assuming disconnection... - '+str(e))
+                    print("Receiving failed! Assuming disconnection... - "+str(e))
                     break
 
     def _play(self):
@@ -229,10 +234,10 @@ class MyThread(threading.Thread):
     def _prev(self):
         self.shell.props.shell_player.do_previous()
 
-    def _getVol(self):
+    def _get_vol(self):
         return self.shell.props.shell_player.get_volume()[1]
 
-    def _setVol(self, vol):
+    def _set_vol(self, vol):
         if vol > 1.0:
             vol = 1.0
         elif vol < 0.0:
@@ -255,7 +260,38 @@ class MyThread(threading.Thread):
 
             self.shell.props.shell_player.play_entry(entry, source)
 
-    def _getTrackList(self):
+    def __pack(self, string):
+        return base64.b64encode(bytes(string, "utf-8")).decode("utf-8")
+
+    def _get_currently_playing(self):
+        playing_entry = self.shell.props.shell_player.get_playing_entry()
+
+        if not playing_entry:
+            xml = "<track>"
+            xml += "<playing>0</playing>"
+            xml += "</track>"
+
+        else:
+            artist = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.ARTIST))
+            title = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.TITLE))
+            album = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.ALBUM))
+            url = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.LOCATION))
+            duration = self.__pack(str(self.shell.props.shell_player.get_playing_song_duration()))
+            position = self.__pack(str(self.shell.props.shell_player.get_playing_time()[1]))
+
+            xml = "<xml version='1.0' encoding='utf-8'><track>"
+            xml += "<playing>1</playing>"
+            xml += "<artist>" + artist + "</artist>"
+            xml += "<title>" + title + "</title>"
+            xml += "<album>" + album + "</album>"
+            xml += "<url>" + url + "</url>"
+            xml += "<duration>" + duration + "</duration>"
+            xml += "<position>" + position + "</position>"
+            xml += "</track>"
+
+        return xml
+
+    def _get_track_list(self):
 
         xml = "<xml version='1.0' encoding='utf-8'><tracks>"
 
@@ -268,26 +304,18 @@ class MyThread(threading.Thread):
             self.shell.props.library_source.props.base_query_model:
             entry = row[0]
 
-            artist = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.ARTIST).encode('utf-8'
-                                 )).decode('utf-8')
-            title = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.TITLE).encode('utf-8'
-                                 )).decode('utf-8')
-            album = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.ALBUM).encode('utf-8'
-                                 )).decode('utf-8')
-            url = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.LOCATION).encode('utf-8'
-                                 )).decode('utf-8')
+            artist = self.__pack(entry.get_string(RB.RhythmDBPropType.ARTIST))
+            title = self.__pack(entry.get_string(RB.RhythmDBPropType.TITLE))
+            album = self.__pack(entry.get_string(RB.RhythmDBPropType.ALBUM))
+            url = self.__pack(entry.get_string(RB.RhythmDBPropType.LOCATION))
 
-            xml += '<track>'
-            xml += '<artist>' + artist + '</artist>'
-            xml += '<title>' + title + '</title>'
-            xml += '<album>' + album + '</album>'
-            xml += '<url>' + url + '</url>'
-            xml += '</track>'
+            xml += "<track>"
+            xml += "<artist>" + artist + "</artist>"
+            xml += "<title>" + title + "</title>"
+            xml += "<album>" + album + "</album>"
+            xml += "<url>" + url + "</url>"
+            xml += "</track>"
 
-        xml += '</tracks></xml>'
+        xml += "</tracks></xml>"
 
         return xml
