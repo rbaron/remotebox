@@ -267,9 +267,10 @@ class MyThread(threading.Thread):
         playing_entry = self.shell.props.shell_player.get_playing_entry()
 
         if not playing_entry:
+            xml = "<xml version='1.0' encoding='utf-8'><track>"
             xml = "<track>"
             xml += "<playing>0</playing>"
-            xml += "</track>"
+            xml += "</track></xml>"
 
         else:
             artist = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.ARTIST))
@@ -287,7 +288,7 @@ class MyThread(threading.Thread):
             xml += "<url>" + url + "</url>"
             xml += "<duration>" + duration + "</duration>"
             xml += "<position>" + position + "</position>"
-            xml += "</track>"
+            xml += "</track></xml>"
 
         return xml
 
