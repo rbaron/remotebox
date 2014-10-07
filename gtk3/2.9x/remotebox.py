@@ -304,10 +304,7 @@ class MyThread(threading.Thread):
             url = \
                 self.__pack(entry.get_string(RB.RhythmDBPropType.LOCATION))
             duration = \
-                self.__pack(`entry.get_ulong(RB.RhythmDBPropType.DURATION)`)
-
-            # We have a 'problem' with duration field: because we extract info via get_ulong, it returns a number
-            # with a 'L' as prefix, and not a clean number. How can we remove the L ?
+                self.__pack(str(entry.get_ulong(RB.RhythmDBPropType.DURATION)))
 
             xml += '<track>'
             xml += '<artist>' + artist + '</artist>'

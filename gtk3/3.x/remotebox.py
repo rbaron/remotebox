@@ -308,17 +308,14 @@ class MyThread(threading.Thread):
             artist = self.__pack(entry.get_string(RB.RhythmDBPropType.ARTIST))
             title = self.__pack(entry.get_string(RB.RhythmDBPropType.TITLE))
             album = self.__pack(entry.get_string(RB.RhythmDBPropType.ALBUM))
-
-            # TODO: For some reason this is crashing rhythmbox (python 3.4.1, rhythmbox 3.0.3)
-            #duration = self.__pack(str(entry.get_string(RB.RhythmDBPropType.DURATION)))
-
+            duration = self.__pack(str(entry.get_ulong(RB.RhythmDBPropType.DURATION)))
             url = self.__pack(entry.get_string(RB.RhythmDBPropType.LOCATION))
 
             xml += "<track>"
             xml += "<artist>" + artist + "</artist>"
             xml += "<title>" + title + "</title>"
             xml += "<album>" + album + "</album>"
-            #xml += "<duration>" + album + "</duration>"
+            xml += "<duration>" + duration + "</duration>"
             xml += "<url>" + url + "</url>"
             xml += "</track>"
 
