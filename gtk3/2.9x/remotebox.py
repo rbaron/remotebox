@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# github branch
 
 from gi.repository import GObject, RB, Peas
 
@@ -189,6 +190,10 @@ class MyThread(threading.Thread):
                                     break
                                 else:
                                     ptr = ptr + BUFFSIZE
+
+                        elif parts[0] == "get_playing":
+                            self.srv.send(self._get_currently_playing()+"\n")
+
                         else:
 
                             self.srv.send('Unrecognized input.\n')
@@ -244,6 +249,39 @@ class MyThread(threading.Thread):
                 entry.get_string(RB.RhythmDBPropType.TITLE)
             self.shell.props.shell_player.play_entry(entry, source)
 
+    def __pack(self, string):
+        return base64.b64encode(string)
+
+    def _get_currently_playing(self):
+        playing_entry = self.shell.props.shell_player.get_playing_entry()
+
+        if not playing_entry:
+            xml = "<xml version='1.0' encoding='utf-8'><track>"
+            xml = "<track>"
+            xml += "<playing>0</playing>"
+            xml += "</track></xml>"
+
+        else:
+            artist = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.ARTIST))
+            title = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.TITLE))
+            album = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.ALBUM))
+            url = self.__pack(playing_entry.get_string(RB.RhythmDBPropType.LOCATION))
+            duration = self.__pack(str(self.shell.props.shell_player.get_playing_song_duration()))
+            position = self.__pack(str(self.shell.props.shell_player.get_playing_time()[1]))
+
+            xml = "<xml version='1.0' encoding='utf-8'><track>"
+            xml += "<playing>1</playing>"
+            xml += "<artist>" + artist + "</artist>"
+            xml += "<title>" + title + "</title>"
+            xml += "<album>" + album + "</album>"
+            xml += "<url>" + url + "</url>"
+            xml += "<duration>" + duration + "</duration>"
+            xml += "<position>" + position + "</position>"
+            xml += "</track></xml>"
+
+        return xml
+
+
     def _getTrackList(self):
 
         xml = "<xml version='1.0' encoding='utf-8'><tracks>"
@@ -258,19 +296,25 @@ class MyThread(threading.Thread):
             entry = row[0]
 
             artist = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.ARTIST))
+                self.__pack(entry.get_string(RB.RhythmDBPropType.ARTIST))
             title = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.TITLE))
+                self.__pack(entry.get_string(RB.RhythmDBPropType.TITLE))
             album = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.ALBUM))
+                self.__pack(entry.get_string(RB.RhythmDBPropType.ALBUM))
             url = \
-                base64.b64encode(entry.get_string(RB.RhythmDBPropType.LOCATION))
+                self.__pack(entry.get_string(RB.RhythmDBPropType.LOCATION))
+            duration = \
+                self.__pack(`entry.get_ulong(RB.RhythmDBPropType.DURATION)`)
+
+            # We have a 'problem' with duration field: because we extract info via get_ulong, it returns a number
+            # with a 'L' as prefix, and not a clean number. How can we remove the L ?
 
             xml += '<track>'
             xml += '<artist>' + artist + '</artist>'
             xml += '<title>' + title + '</title>'
             xml += '<album>' + album + '</album>'
             xml += '<url>' + url + '</url>'
+            xml += '<duration>' + duration + '</duration>'
             xml += '</track>'
 
         xml += '</tracks></xml>'
