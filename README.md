@@ -14,8 +14,8 @@ To automate the process, copy the following and execute on a terminal console:
 $  plugin_path="$HOME/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p "$plugin_path" && \
    cd "$plugin_path" || exit && \
-   wget https://raw.github.com/raaapha/remotebox/master/gtk3/3.x/remotebox.plugin && \
-   wget https://raw.github.com/raaapha/remotebox/master/gtk3/3.x/remotebox.py
+   wget https://raw.github.com/rbaron/remotebox/master/gtk3/3.x/remotebox.plugin && \
+   wget https://raw.github.com/rbaron/remotebox/master/gtk3/3.x/remotebox.py
 ```
 
 Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "Remotebox" is checked.
@@ -29,22 +29,22 @@ To automate the process, copy the following and execute on a terminal console:
 $  plugin_path="$HOME/.local/share/rhythmbox/plugins/remotebox/" && \
    mkdir -p "$plugin_path" && \
    cd "$plugin_path" || exit && \
-   wget https://raw.github.com/raaapha/remotebox/master/gtk3/2.9x/remotebox.plugin && \
-   wget https://raw.github.com/raaapha/remotebox/master/gtk3/2.9x/remotebox.py
+   wget https://raw.github.com/rbaron/remotebox/master/gtk3/2.9x/remotebox.plugin && \
+   wget https://raw.github.com/rbaron/remotebox/master/gtk3/2.9x/remotebox.py
 ```
 
 Afterwards, __make sure the plugin is enabled in Rhythmbox__. Go to Edit > Plugins and make sure "Remotebox" is checked.
 
 ###For GTK2 / Rhythmbox 0.x users
 
-The support is experimental (please contribute!). For instructions on how to install, see [Installation](https://github.com/raaapha/remotebox/wiki/Installation).
+The support is experimental (please contribute!). For instructions on how to install, see [Installation](https://github.com/rbaron/remotebox/wiki/Installation).
 
 Usage
 -----
 
 If you're using it with the android client, you don't have to do anything else. Just run the app and you're set!
 
-If you want to use this plugin for controlling Rhythmbox through a TCP socket, there is a section just for you at [Usage/Available commands](https://github.com/raaapha/remotebox/wiki/Usage---Commands).
+If you want to use this plugin for controlling Rhythmbox through a TCP socket, there is a section just for you at [Usage/Available commands](https://github.com/rbaron/remotebox/wiki/Usage---Commands).
 
 Contribute
 ----------
