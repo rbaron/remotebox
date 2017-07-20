@@ -6,7 +6,7 @@ A remote control plugin for [Rhythmbox](http://projects.gnome.org/rhythmbox/). I
 Installation
 ------------
 ###For GTK3 / Rhythmbox 3.x users
-Copy the files `gtk3/3.x/remotebox.py` and `gtk3/3.x/remotebox.plugin` to a folder called "Remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`.
+Copy the files `gtk3/3.x/remotebox.py` and `gtk3/3.x/remotebox.plugin` to a folder called "Remotebox" on your Rhythmbox plugins directory, usually `~/.local/share/rhythmbox/plugins/`, or `/usr/lib/rhythmbox/plugins`.
 
 To automate the process, copy the following and execute on a terminal console:
 
